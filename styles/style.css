@@ -1,0 +1,10 @@
+.header{
+    margin-bottom: 5em;
+}
+img{
+    height: 560px;
+    object-fit: cover;
+}
+h3{
+    margin-top: 5em;
+}
