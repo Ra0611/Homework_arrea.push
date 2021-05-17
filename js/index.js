@@ -13,7 +13,20 @@
 //111-119 - дает ов
 //211-219 - дает ов
 //101
+const publicArea = {
+	key: '<th>Зоны общественного пользования</th>',
+	content: '<td>Общая кухня</td>'
+}
+const moreService = {
+	key: '<th>Разное</th>',
+	content: '<td>Номера для некурящих, Семейные номера, Звукоизолированные номера, Отопление, Курение на всей территории запрещено, Кондиционер</td>'
+}
 
+const luxNumbers = {
+	title: 'lux',
+	pay: 10000,
+	count: 11
+}
 
 const dataHotel = {
 	services: [
@@ -30,7 +43,7 @@ const dataHotel = {
 		{
 			title: 'vip',
 			pay: 10000,
-			count: 11
+			count: 10
 		},
 		{
 			title: 'premium',
@@ -40,20 +53,22 @@ const dataHotel = {
 		{
 			title: 'standard',
 			pay: 1000,
-			count: 90
+			count: 9
 		}
+		// {
+		// 	title:
+		// 	pay: 
+		// 	count: 
+		// }
 	]
 }
-const publicArea = {
-	key: '<th>Зоны общественного пользования</th>',
-	content: '<td>Общая кухня</td>'
-}
-const moreService = {
-	key: '<th>Разное</th>',
-	content: '<td>Номера для некурящих, Семейные номера, Звукоизолированные номера, Отопление, Курение на всей территории запрещено, Кондиционер</td>'
-}
+
 dataHotel.services.push(publicArea)
 dataHotel.services.push(moreService)
+
+// dataHotel.apartaments[3].title
+
+// console.log(dataHotel.apartaments[3].title)
 
 const dataService = dataHotel.services
 function innerRow(inner) {
@@ -67,8 +82,39 @@ innerRow('row2')
 innerRow('row3')
 innerRow('row4')
 
+const contentVip = document.querySelector('.item-vip')
+const countVip = dataHotel.apartaments[0].count
 
-// console.log(innerRow())
+const contentPremium = document.querySelector('.item-premium')
+const countPremium = dataHotel.apartaments[1].count
+
+const contentStandard = document.querySelector('.item-standard')
+const countStandard = dataHotel.apartaments[2].count
+
+// const count = countVip + countPremium + countStandard
+const count = countVip + countPremium + countStandard
+if ((count % 100) >= 11 && (count % 100) <= 19) {
+	numberTransformSt = 'ов'
+} else if ((count % 10) === 1) {
+	numberTransformSt = '' 
+} else if (count > 5 && count < 20) {
+	numberTransformSt = 'ов'
+} else if ((count % 10) >=2 && (count % 10) <=4) {
+	numberTransformSt = 'a'
+} else {
+	numberTransformSt = 'ов'
+}
+let textAmount = `номер${numberTransformSt}`
+
+const infoAboutNumber = document.getElementById('navbarDropdownMenuLink')
+infoAboutNumber.innerText = (`Свободные номера: ${count} номер${numberTransformSt}`)
+contentVip.innerText = (`VIP ${countVip}: номер${numberTransformSt}`)
+contentPremium.innerText = (`Premium ${countPremium}: номер${numberTransformSt}`)
+contentStandard.innerText = (`Standard ${countStandard}: номер${numberTransformSt}`)
+
+
+const date = Number(prompt('!!'))
+console.log(count)
 // Получить и занести в новый ключ общее кол-во номеров в гостинице
 // Расширить в инфо об апартаментах (добавить "наличие wifi", "кухня")
 // * Добавить новый тип апартаментов (.push) 'luks'
